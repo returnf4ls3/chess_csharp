@@ -59,6 +59,7 @@ namespace chess
                 prevButton = pressed;
                 prevButtonColor = pressed.BackColor;
                 prevButtonImage = pressed.Image;
+                pressed.BackColor = Color.Red;
                 moving = true;
             }
             else if (moving)
@@ -71,9 +72,6 @@ namespace chess
                 prevButtonImage = null;
                 moving = false;
             }
-
-            prevButtonColor = pressed.BackColor;
-            prevButton = pressed;
         }
 
         private void Form1_Load(object sender, EventArgs e)
