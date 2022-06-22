@@ -12,7 +12,11 @@ namespace chess
 {
     public partial class Form1 : Form
     {
-        public static string selected;
+        public Button prevButton;
+        public Color prevButtonColor;
+        public Image prevButtonImage;
+        public bool moving = false;
+
         public int[,] map = new int[8, 8]
         {
             { 0,0,0,0,0,0,0,0 },
@@ -48,12 +52,33 @@ namespace chess
 
         private void onButtonClick(object sender, EventArgs e)
         {
-            
+            Button pressed = sender as Button;
+
+            if (!moving && pressed.Image != null)
+            {
+                prevButton = pressed;
+                prevButtonColor = pressed.BackColor;
+                prevButtonImage = pressed.Image;
+                moving = true;
+            }
+            else if (moving)
+            {
+                prevButton.Image = null;
+                pressed.Image = prevButtonImage;
+                prevButton.BackColor = prevButtonColor;
+
+                prevButton = null;
+                prevButtonImage = null;
+                moving = false;
+            }
+
+            prevButtonColor = pressed.BackColor;
+            prevButton = pressed;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
